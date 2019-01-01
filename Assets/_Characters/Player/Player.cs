@@ -76,7 +76,8 @@ namespace RPG.Characters
             }
             else
             {
-                print("No cosmetics for this weapon.");
+                return;
+                //print("No cosmetics for this weapon.");
             }
 
         }
