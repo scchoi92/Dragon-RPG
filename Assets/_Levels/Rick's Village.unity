@@ -5180,7 +5180,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8118283490620274536, guid: c7ea70489b8761b4b9fb4a770b5b65f8,
+        type: 3}
+      propertyPath: targetCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 3cfaa99ee5395b440afbf20fac0835e7, type: 3}
+    - target: {fileID: 8118283490620274536, guid: c7ea70489b8761b4b9fb4a770b5b65f8,
+        type: 3}
+      propertyPath: enemyCursor
+      value: 
+      objectReference: {fileID: 2800000, guid: 3cfaa99ee5395b440afbf20fac0835e7, type: 3}
+    m_RemovedComponents:
+    - {fileID: 114294829368660586, guid: c7ea70489b8761b4b9fb4a770b5b65f8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c7ea70489b8761b4b9fb4a770b5b65f8, type: 3}
 --- !u!1001 &1326436117
 PrefabInstance:

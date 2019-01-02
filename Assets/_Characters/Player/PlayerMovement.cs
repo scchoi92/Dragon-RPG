@@ -11,45 +11,39 @@ namespace RPG.Characters
     [RequireComponent(typeof(ThirdPersonCharacter))]
     public class PlayerMovement : MonoBehaviour
     {
-        CameraRaycaster cameraRaycaster = null;
+        ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
+        CameraUI.CameraRaycaster cameraRaycaster = null;
         Vector3 clickPoint;
         AICharacterControl aiCharacterControl = null;
         GameObject walkTarget = null;
 
-        [SerializeField] const int walkableLayerNumber = 9;
-        [SerializeField] const int enemyLayerNumber = 10;
-
-
         private void Start()
         {
-            cameraRaycaster = Camera.main.GetComponent<CameraRaycaster>();
+            cameraRaycaster = Camera.main.GetComponent<CameraUI.CameraRaycaster>();
+            thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
             aiCharacterControl = GetComponent<AICharacterControl>();
             walkTarget = new GameObject("walkTarget");
 
-            cameraRaycaster.notifyMouseClickObservers += ProcessMouseClick;
+            cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
+            cameraRaycaster.onMouseOverPotentiallyWalkable += OnMouseOverPotentiallyWalkable;
+
         }
 
-        void ProcessMouseClick(RaycastHit raycastHit, int layerHit)
+        void OnMouseOverEnemy(Enemy enemy)
         {
-            switch (layerHit)
+            if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(1))
             {
-                case enemyLayerNumber:
-                    // navigate to the enemy
-                    GameObject enemy = raycastHit.collider.gameObject;
-                    aiCharacterControl.SetTarget(enemy.transform);
-                    break;
-                case walkableLayerNumber:
-                    walkTarget.transform.position = raycastHit.point;
-                    aiCharacterControl.SetTarget(walkTarget.transform);
-                    break;
-                default:
-                    Debug.LogWarning("Don't know how to handle mouse movement");
-                    return;
-
+                aiCharacterControl.SetTarget(enemy.transform);
             }
-
-
         }
 
+        void OnMouseOverPotentiallyWalkable(Vector3 destination)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                walkTarget.transform.position = destination;
+                aiCharacterControl.SetTarget(walkTarget.transform);
+            }
+        }
     }
 }

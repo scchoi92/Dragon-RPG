@@ -61,7 +61,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Editor\CameraRaycasterEditor.cs" />
+    <Compile Include="Assets\_CameraUI\Editor\CameraRaycasterEditor.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Work/Repos/RPG Core Combat Creator/Dragon RPG/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
