@@ -7397,9 +7397,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114210096228230938, guid: 45f9d06bf6c17514a9a4af48535692f0,
         type: 3}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114210096228230938, guid: 45f9d06bf6c17514a9a4af48535692f0,
+        type: 3}
       propertyPath: weaponInUse
       value: 
-      objectReference: {fileID: 11400000, guid: 8a5f7d1f8bb1c9545bcdc9fba1a3a680,
+      objectReference: {fileID: 11400000, guid: e79800f173b966c48bac8d8a68b82219,
+        type: 2}
+    - target: {fileID: 114210096228230938, guid: 45f9d06bf6c17514a9a4af48535692f0,
+        type: 3}
+      propertyPath: ability1
+      value: 
+      objectReference: {fileID: 11400000, guid: 6fc6b922541eec941a4184d3d3ae926a,
+        type: 2}
+    - target: {fileID: 114210096228230938, guid: 45f9d06bf6c17514a9a4af48535692f0,
+        type: 3}
+      propertyPath: abilities.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6fc6b922541eec941a4184d3d3ae926a,
         type: 2}
     - target: {fileID: 3835233738092184274, guid: 45f9d06bf6c17514a9a4af48535692f0,
         type: 3}

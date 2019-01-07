@@ -21,6 +21,7 @@ public class AudioTrigger : MonoBehaviour
         SphereCollider sphereCollider = gameObject.AddComponent<SphereCollider>();
         sphereCollider.isTrigger = true;
         sphereCollider.radius = triggerRadius*2;
+        gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
     }
 
     void OnTriggerEnter(Collider other)

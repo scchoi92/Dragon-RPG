@@ -19,25 +19,17 @@ namespace RPG.Characters
 
         [SerializeField] Weapon weaponInUse;
         [SerializeField] AnimatorOverrideController animatorOverrideController;
+
+        // Temporarily serialized for dubbing
+        [SerializeField] SpecialAbilityConfig[] abilities;
+
         Animator animator;
-
-        // [SerializeField] GameObject weaponSocket;
-
         CameraRaycaster cameraRaycaster;
         float lastHitTime = 0f;
 
-        public float healthAsPercentage
-        {
-            get
-            {
-                return currentHealthPoints / maxHealthPoints;
-            }
-        }
+        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
-        public void TakeDamage(float damage)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-        }
+        public void TakeDamage(float damage) { currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints); }
 
         private void Start()
         {
@@ -45,6 +37,7 @@ namespace RPG.Characters
             SetCurrentMaxHealth();
             PutWeaponInHand();
             SetupRuntimeAnimator();
+            abilities[0].AttachComponentTo(gameObject);
         }
 
         private void SetCurrentMaxHealth()
@@ -75,7 +68,6 @@ namespace RPG.Characters
             else
             {
                 return;
-                //print("No cosmetics for this weapon.");
             }
 
         }
@@ -111,8 +103,25 @@ namespace RPG.Characters
             {
                 AttackTarget(enemy);
             }
+            else if (Input.GetMouseButtonDown(1))
+            {
+                AttemptSpecialAbility(0, enemy);
+            }
         }
 
+        private void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
+        {
+            var energyComponent = GetComponent<Energy>();
+            if (energyComponent.isEnergyAvailable(10f)) // TODO read from scriptable object
+            {
+                energyComponent.ConsumeEnergy(10f);
+                abilities[abilityIndex].Use();
+            }
+            else
+            {
+                print("Not enough Energy");
+            }
+        }
 
         private void AttackTarget(Enemy enemy)
         {
