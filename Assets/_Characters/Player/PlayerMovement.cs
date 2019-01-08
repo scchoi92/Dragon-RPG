@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityStandardAssets.Characters.ThirdPerson;
 using UnityEngine.AI;
 using RPG.CameraUI; // TODO consider re-wiring
 
@@ -11,7 +10,7 @@ namespace RPG.Characters
     [RequireComponent(typeof(ThirdPersonCharacter))]
     public class PlayerMovement : MonoBehaviour
     {
-        ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
+        //ThirdPersonCharacter thirdPersonCharacter = null;   // A reference to the ThirdPersonCharacter on the object
         CameraUI.CameraRaycaster cameraRaycaster = null;
         Vector3 clickPoint;
         AICharacterControl aiCharacterControl = null;
@@ -20,7 +19,7 @@ namespace RPG.Characters
         private void Start()
         {
             cameraRaycaster = Camera.main.GetComponent<CameraUI.CameraRaycaster>();
-            thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
+            //thirdPersonCharacter = GetComponent<ThirdPersonCharacter>();
             aiCharacterControl = GetComponent<AICharacterControl>();
             walkTarget = new GameObject("walkTarget");
 

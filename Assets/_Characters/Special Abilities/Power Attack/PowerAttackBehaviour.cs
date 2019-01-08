@@ -14,14 +14,17 @@ namespace RPG.Characters
             this.config = configToSet;
         }
 
-        public void Use()
-        {
-            print("Power Attack used");
-        }
-
         private void Start()
         {
             Debug.Log("Power Attack Behaviour attached to " + gameObject.name);
         }
+
+        public void Use(AbilityUseParams useParams)
+        {
+            print("Power Attack used by: " + gameObject.name);
+            float damageToDeal = useParams.baseDamage + config.GetExtraDamage();
+            useParams.target.TakeDamage(damageToDeal);
+        }
+
     }
 }
