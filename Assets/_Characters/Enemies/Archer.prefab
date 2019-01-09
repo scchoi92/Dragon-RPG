@@ -85,7 +85,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.3
+  m_Radius: 0.2
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
@@ -98,9 +98,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 141614014}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.01
+  m_Radius: 0.4
   m_Speed: 2
-  m_Acceleration: 8
+  m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 50
   m_StoppingDistance: 1.5
@@ -307,10 +307,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.069
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 867694a5858127940bb9ecb81fec5742, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 3482dd3d1cf3c3844b8c2f25b95800a3, type: 2}
     - target: {fileID: 13700002, guid: 867694a5858127940bb9ecb81fec5742, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
@@ -331,6 +327,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: bd380be6b5701e84b8eb5d0461891480, type: 2}
+    - target: {fileID: 2300000, guid: 867694a5858127940bb9ecb81fec5742, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3482dd3d1cf3c3844b8c2f25b95800a3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 867694a5858127940bb9ecb81fec5742, type: 3}
 --- !u!4 &5067019139698486023 stripped

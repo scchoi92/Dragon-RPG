@@ -16,6 +16,8 @@ namespace RPG.CameraUI
         const int ENEMY_LAYER_NUMBER = 10;
         float maxRaycastDepth = 100f; // Hard coded value
 
+        Rect currentScreenRect; // move inside update to support screen resize
+
         public delegate void OnMouseOverEnemy(Enemy enemy);
         public event OnMouseOverEnemy onMouseOverEnemy;
 
@@ -24,6 +26,7 @@ namespace RPG.CameraUI
 
         void Update()
         {
+            currentScreenRect = new Rect(0, 0, Screen.width, Screen.height);
             // Check if pointer is over an interactable UI element
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -37,9 +40,12 @@ namespace RPG.CameraUI
 
         void PerformRaycasts()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (RaycastForEnemy(ray)) { return; }
-            if (RaycastForPotentiallyWalkable(ray)) { return; }
+            if (currentScreenRect.Contains(Input.mousePosition))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (RaycastForEnemy(ray)) { return; }
+                if (RaycastForPotentiallyWalkable(ray)) { return; }
+            }
         }
 
         bool RaycastForEnemy(Ray ray)

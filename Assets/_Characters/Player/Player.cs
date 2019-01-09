@@ -1,8 +1,9 @@
-﻿using System;
+﻿//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEditor.SceneManagement;
 
 // TODO consider re-wiring
 using RPG.CameraUI;
@@ -21,16 +22,19 @@ namespace RPG.Characters
         [SerializeField] Weapon weaponInUse;
         [SerializeField] AnimatorOverrideController animatorOverrideController;
 
+
+        [SerializeField] AudioClip[] damageSounds;
+        [SerializeField] AudioClip[] deathSounds;
         // Temporarily serialized for dubbing
         [SerializeField] SpecialAbility[] abilities;
 
+        const string ATTACK_TRIGGER = "Attack";
+        const string DEATH_TRIGGER = "Death";
+
+        AudioSource myaudioSource;
         Animator animator;
         CameraRaycaster cameraRaycaster;
         float lastHitTime = 0f;
-
-        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
-
-        public void TakeDamage(float damage) { currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints); }
 
         private void Start()
         {
@@ -39,7 +43,37 @@ namespace RPG.Characters
             PutWeaponInHand();
             SetupRuntimeAnimator();
             abilities[0].AttachComponentTo(gameObject);
+            myaudioSource = GetComponent<AudioSource>();
         }
+
+        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
+
+        public void TakeDamage(float damage)
+        {
+            bool playerDies = (currentHealthPoints - damage <= 0);
+            ReduceHealth(damage);
+            if (playerDies)
+            {
+                StartCoroutine(KillPlayer());
+            }
+        }
+        private void ReduceHealth(float damage)
+        {
+            myaudioSource.clip = damageSounds[Random.Range(0, damageSounds.Length)];
+            myaudioSource.Play();
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+        }
+
+        IEnumerator KillPlayer()
+        {
+            myaudioSource.clip = deathSounds[Random.Range(0, deathSounds.Length)];
+            myaudioSource.Play();
+            animator.SetTrigger(DEATH_TRIGGER);
+            yield return new WaitForSecondsRealtime(myaudioSource.clip.length + 1f);
+            EditorSceneManager.LoadScene(0);
+        }
+
+
 
         private void SetCurrentMaxHealth()
         {
@@ -131,7 +165,7 @@ namespace RPG.Characters
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBtwHits())
             {
                 this.transform.LookAt(enemy.transform);
-                animator.SetTrigger("Attack"); //TODO make const
+                animator.SetTrigger(ATTACK_TRIGGER); //TODO make const
                 enemy.TakeDamage(baseDamage);
                 lastHitTime = Time.time;
             }

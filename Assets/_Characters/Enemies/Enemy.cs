@@ -19,7 +19,9 @@ namespace RPG.Characters
 
         [SerializeField] float attackRadius = 3f;
         [SerializeField] float damagePerShot = 9f;
-        [SerializeField] float secondsBtwShots = 0.5f;
+        [SerializeField] float firingPeriodInS = 0.5f;
+        [SerializeField] float firingPeriodVariation = 0.1f;
+
         bool isAttacking = false;
 
 
@@ -28,7 +30,7 @@ namespace RPG.Characters
         Vector3 aimOffset = new Vector3(0, 1.5f, 0f);
 
         AICharacterControl aiCharacterControl = null;
-        GameObject player = null;
+        Player player = null;
         GameObject originalPosition;
         //[SerializeField] GameObject originalPositionHolder; // give a new tag for this "holder" and find it on Start()?
         //or, make empty script, add it to the holder, so it can be found using getcomponent?
@@ -51,7 +53,7 @@ namespace RPG.Characters
         private void Start()
         {
             currentHealthPoints = maxHealthPoints;
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = FindObjectOfType<Player>();
             aiCharacterControl = GetComponent<AICharacterControl>();
             originalPosition = new GameObject("Enemy original position");
             originalPosition.transform.position = transform.position;
@@ -60,11 +62,14 @@ namespace RPG.Characters
 
         private void Update()
         {
+            if(player.healthAsPercentage <=Mathf.Epsilon)
+            { StopAllCoroutines(); Destroy(this); }
             float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
             if (distanceToPlayer <= attackRadius && !isAttacking)
             {
                 isAttacking = true;
-                InvokeRepeating("FireProjectile", 0.25f, secondsBtwShots); //TODO switch to couroutines
+                float randomisedDelay = Random.Range(firingPeriodInS - firingPeriodVariation, firingPeriodInS + firingPeriodVariation);
+                InvokeRepeating("FireProjectile", 0.25f, randomisedDelay); //TODO switch to couroutines
                 transform.LookAt(player.transform);
             }
 
