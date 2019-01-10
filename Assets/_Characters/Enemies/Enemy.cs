@@ -116,7 +116,8 @@ namespace RPG.Characters
         // TODO seperate out Character firing logic
         void FireProjectile()
         {
-            GameObject newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.identity);
+
+            GameObject newProjectile = Instantiate(projectileToUse, projectileSocket.transform.position, Quaternion.LookRotation(player.transform.position));
             Projectile projectileComponent = newProjectile.GetComponent<Projectile>();
             projectileComponent.SetDamage(damagePerShot);
             projectileComponent.SetShooter(gameObject);
