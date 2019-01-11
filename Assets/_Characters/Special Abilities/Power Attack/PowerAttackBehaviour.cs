@@ -16,15 +16,27 @@ namespace RPG.Characters
 
         private void Start()
         {
-            Debug.Log("Power Attack Behaviour attached to " + gameObject.name);
         }
 
         public void Use(AbilityUseParams useParams)
         {
-            print("Power Attack used by: " + gameObject.name);
-            float damageToDeal = useParams.baseDamage + config.GetExtraDamage();
-            useParams.target.TakeDamage(damageToDeal);
+            DealDamage(useParams);
+            PlayParticleEffect();
         }
 
+        private void PlayParticleEffect()
+        {
+            var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
+            ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>();
+            myParticleSystem.Play();
+            Destroy(prefab, myParticleSystem.main.duration + 2f);
+        }
+
+
+        private void DealDamage(AbilityUseParams useParams)
+        {
+            float damageToDeal = useParams.baseDamage + config.GetExtraDamage();
+            useParams.target.AdjustHealth(damageToDeal);
+        }
     }
 }

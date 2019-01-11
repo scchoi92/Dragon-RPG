@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Core;
+using System;
 
 namespace RPG.Characters
 {
@@ -16,12 +17,21 @@ namespace RPG.Characters
 
         private void Start()
         {
-            Debug.Log("Area Attack Behaviour attached to " + gameObject.name);
         }
 
         public void Use(AbilityUseParams useParams)
         {
-            print("Area Attack used by: " + gameObject.name);
+            DealRadialDamage(useParams);
+            PlayParticleEffect();
+        }
+
+        private void PlayParticleEffect()
+        {
+            Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
+        }
+
+        private void DealRadialDamage(AbilityUseParams useParams)
+        {
             RaycastHit[] hits = Physics.SphereCastAll(
                 transform.position,
                 config.GetEffectRadius(),
@@ -32,10 +42,11 @@ namespace RPG.Characters
             foreach (RaycastHit hit in hits)
             {
                 var damageable = hit.collider.gameObject.GetComponent<IDamageable>();
-                if(damageable != null)
+                bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
+                if (damageable != null && !hitPlayer)
                 {
                     float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget();
-                    damageable.TakeDamage(damageToDeal);
+                    damageable.AdjustHealth(damageToDeal);
                 }
             }
         }

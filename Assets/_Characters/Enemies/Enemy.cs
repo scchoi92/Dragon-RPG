@@ -31,7 +31,9 @@ namespace RPG.Characters
 
         AICharacterControl aiCharacterControl = null;
         Player player = null;
+
         GameObject originalPosition;
+        GameObject originalPositionHolder;
         //[SerializeField] GameObject originalPositionHolder; // give a new tag for this "holder" and find it on Start()?
         //or, make empty script, add it to the holder, so it can be found using getcomponent?
 
@@ -44,10 +46,16 @@ namespace RPG.Characters
             }
         }
 
-        public void TakeDamage(float damage)
+        public void AdjustHealth(float damage)
         {
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
             if (currentHealthPoints <= 0) { Destroy(gameObject); }
+        }
+
+        private void Awake()
+        {
+
+            originalPositionHolder = FindObjectOfType<OriginalPositionHolder>().gameObject;
         }
 
         private void Start()
@@ -55,9 +63,9 @@ namespace RPG.Characters
             currentHealthPoints = maxHealthPoints;
             player = FindObjectOfType<Player>();
             aiCharacterControl = GetComponent<AICharacterControl>();
-            originalPosition = new GameObject("Enemy original position");
+            originalPosition = new GameObject(gameObject.name + " original position");
             originalPosition.transform.position = transform.position;
-            // originalPosition.transform.parent = originalPositionHolder.transform; // if I want to keep my hierarchy tidy(in game)
+            originalPosition.transform.parent = originalPositionHolder.transform;
         }
 
         private void Update()

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Area Attack L1
   m_EditorClassIdentifier: 
   energyCost: 10
+  particlePrefab: {fileID: 2741281205029947288, guid: 411ea9f52473893469ac40f358a1f72e,
+    type: 3}
   effectRadius: 5
   damageToEachTarget: 50

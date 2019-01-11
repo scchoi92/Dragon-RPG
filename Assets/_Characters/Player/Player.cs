@@ -9,6 +9,7 @@ using UnityEditor.SceneManagement;
 using RPG.CameraUI;
 using RPG.Weapons;
 using RPG.Core;
+using System;
 
 namespace RPG.Characters
 {
@@ -25,48 +26,67 @@ namespace RPG.Characters
 
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
+
+        [Range(0.1f, 1.0f)] [SerializeField] float criticalHitChance = 0.1f;
+        [SerializeField] float criticalHitMultiplier = 2;
+        [SerializeField] GameObject critParticle;
+
         // Temporarily serialized for dubbing
-        [SerializeField] SpecialAbility[] abilities;
+        [SerializeField] AbilityConfig[] abilities;
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEATH_TRIGGER = "Death";
 
-        AudioSource myaudioSource;
-        Animator animator;
-        CameraRaycaster cameraRaycaster;
+        Enemy enemy = null;
+        AudioSource myaudioSource = null;
+        Animator animator = null;
+        CameraRaycaster cameraRaycaster = null;
         float lastHitTime = 0f;
+
+        float healTimer = 0f;
+        [SerializeField] float healPerSec = 0f;
 
         private void Start()
         {
+            myaudioSource = GetComponent<AudioSource>();
+
             RegisterForMouseClick();
             SetCurrentMaxHealth();
             PutWeaponInHand();
             SetupRuntimeAnimator();
-            abilities[0].AttachComponentTo(gameObject);
-            myaudioSource = GetComponent<AudioSource>();
+            AttachInitialAbilities();
+        }
+
+        private void AttachInitialAbilities()
+        {
+            for(int abilityIndex = 0; abilityIndex < abilities.Length; abilityIndex++)
+            {
+                abilities[abilityIndex].AttachComponentTo(gameObject);
+            }
         }
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }
 
-        public void TakeDamage(float damage)
+        public void AdjustHealth(float changePoints)
         {
-            bool playerDies = (currentHealthPoints - damage <= 0);
-            ReduceHealth(damage);
+            bool playerDies = (currentHealthPoints - changePoints <= 0);
+            ReduceHealth(changePoints);
             if (playerDies)
             {
                 StartCoroutine(KillPlayer());
             }
         }
+
         private void ReduceHealth(float damage)
         {
-            myaudioSource.clip = damageSounds[Random.Range(0, damageSounds.Length)];
+            myaudioSource.clip = damageSounds[UnityEngine.Random.Range(0, damageSounds.Length)];
             myaudioSource.Play();
             currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
         }
 
         IEnumerator KillPlayer()
         {
-            myaudioSource.clip = deathSounds[Random.Range(0, deathSounds.Length)];
+            myaudioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];
             myaudioSource.Play();
             animator.SetTrigger(DEATH_TRIGGER);
             yield return new WaitForSecondsRealtime(myaudioSource.clip.length + 1f);
@@ -132,19 +152,20 @@ namespace RPG.Characters
             cameraRaycaster.onMouseOverEnemy += OnMouseOverEnemy;
         }
 
-        void OnMouseOverEnemy(Enemy enemy)
+        void OnMouseOverEnemy(Enemy enemyToSet)
         {
-            if (Input.GetMouseButton(0) && IsTargetInRange(enemy.gameObject))
+            enemy = enemyToSet;
+            if (Input.GetMouseButton(0) && IsTargetInRange(enemyToSet.gameObject))
             {
-                AttackTarget(enemy);
+                AttackTarget();
             }
-            else if (Input.GetMouseButtonDown(1) && IsTargetInRange(enemy.gameObject))
+            else if (Input.GetMouseButtonDown(1))
             {
-                AttemptSpecialAbility(0, enemy);
+                AttemptSpecialAbility(0);
             }
         }
 
-        void AttemptSpecialAbility(int abilityIndex, Enemy enemy)
+        void AttemptSpecialAbility(int abilityIndex)
         {
             var energyComponent = GetComponent<Energy>();
             var energyCost = abilities[abilityIndex].GetEnergyCost();
@@ -160,14 +181,30 @@ namespace RPG.Characters
             }
         }
 
-        private void AttackTarget(Enemy enemy)
+        private void AttackTarget()
         {
             if (Time.time - lastHitTime > weaponInUse.GetMinTimeBtwHits())
             {
-                this.transform.LookAt(enemy.transform);
+                transform.LookAt(enemy.transform);
                 animator.SetTrigger(ATTACK_TRIGGER); //TODO make const
-                enemy.TakeDamage(baseDamage);
+                enemy.AdjustHealth(CalculateDamage());
                 lastHitTime = Time.time;
+            }
+            
+        }
+
+        private float CalculateDamage()
+        {
+            bool isCriticalHit = UnityEngine.Random.Range(0f, 1f) <= criticalHitChance;
+            float damageBeforeCritical = baseDamage + weaponInUse.GetAdditionalWeaponDamage();
+            if (isCriticalHit)
+            {
+                Instantiate(critParticle, enemy.transform.position, Quaternion.identity);
+                return damageBeforeCritical * criticalHitMultiplier;
+            }
+            else
+            {
+                return damageBeforeCritical;
             }
         }
 
@@ -175,6 +212,50 @@ namespace RPG.Characters
         {
             float distanceToTarget = (target.transform.position - transform.position).magnitude;
             return distanceToTarget <= weaponInUse.GetMaxAttackRange();
+        }
+
+
+
+        private void Update()
+        {
+            if (healthAsPercentage > Mathf.Epsilon)
+            {
+                ScanForAbilityKeyDown();
+
+                if (healTimer > Mathf.Epsilon)
+                {
+                    healTimer -= Time.deltaTime;
+                    StartHealing();
+                }
+                else
+                {
+                    healPerSec = 0f;
+                }
+
+            }
+        }
+
+        private void ScanForAbilityKeyDown()
+        {
+            for(int keyIndex =1; keyIndex < abilities.Length; keyIndex++)
+            {
+                if (Input.GetKeyDown(keyIndex.ToString()))
+                {
+                    AttemptSpecialAbility(keyIndex);
+                }
+            }
+
+        }
+
+        public void SetHealTimer(float duration, float healAmount)
+        {
+            healTimer += duration;
+            healPerSec = healAmount;
+        }
+
+        public void StartHealing()
+        {
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints + healPerSec * Time.deltaTime, 0f, maxHealthPoints);
         }
     }
 }

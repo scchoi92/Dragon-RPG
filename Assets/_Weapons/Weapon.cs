@@ -14,7 +14,7 @@ namespace RPG.Weapons
         [SerializeField] AnimationClip attackAnimation;
 
         [Header("Weapon Stats")]
-        [SerializeField] float weaponDamagePerHit;
+        [SerializeField] float additionalWeaponDamage;
         [SerializeField] float minTimeBtwHits;
         [SerializeField] float maxAttackRange;
 
@@ -24,7 +24,7 @@ namespace RPG.Weapons
 
         public GameObject GetWeaponPrefab() { return weaponPrefab; }
 
-        public float GetWeaponDamagePerhit() { return weaponDamagePerHit; }
+        public float GetAdditionalWeaponDamage() { return additionalWeaponDamage; }
 
         public float GetMinTimeBtwHits() { return minTimeBtwHits; } //TODO consider whether we take animation time into account
 

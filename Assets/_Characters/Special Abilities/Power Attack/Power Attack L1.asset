@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Power Attack L1
   m_EditorClassIdentifier: 
   energyCost: 10
+  particlePrefab: {fileID: 6880141550999592735, guid: 48be4ee7107d0b040b029b67214bdd76,
+    type: 3}
   extraDamage: 50

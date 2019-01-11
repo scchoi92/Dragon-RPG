@@ -34,7 +34,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743911142558920}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5381311, y: 0, z: -3.16647}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7119712264274844330}
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f6d0d9151d6e44f83017e81f82feee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 500
+  maxHealthPoints: 5000
   baseDamage: 17
   weaponInUse: {fileID: 11400000, guid: e79800f173b966c48bac8d8a68b82219, type: 2}
   animatorOverrideController: {fileID: 22100000, guid: a3f55f6b7aa2a6444bcfc78aa4f918e3,
@@ -185,9 +185,15 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b60f29baeb0a9564bb7834b9774f682b, type: 3}
   - {fileID: 8300000, guid: 08b3da1e8342c1547a6677c76fcb0a5a, type: 3}
   - {fileID: 8300000, guid: 0ac6ff5d685cd47479d465767b9555a8, type: 3}
+  criticalHitChance: 0.15
+  criticalHitMultiplier: 4
+  critParticle: {fileID: 8593406276937859608, guid: 8bddd502f0edc684aa418d49fdb2febc,
+    type: 3}
   abilities:
-  - {fileID: 11400000, guid: 0bb1ce7925c462e4bbe7ce47e8a6036f, type: 2}
   - {fileID: 11400000, guid: 6fc6b922541eec941a4184d3d3ae926a, type: 2}
+  - {fileID: 11400000, guid: 0bb1ce7925c462e4bbe7ce47e8a6036f, type: 2}
+  - {fileID: 11400000, guid: 8989d5bfd81bb5a4cae7ca33c287d240, type: 2}
+  healPerSec: 0
 --- !u!114 &3835233738092184274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -374,6 +380,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7a771e20d96a7a141a64a11bf51fb085, type: 2}
+    - target: {fileID: 2369332, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c30a71e668c04244a81c8c9ccac9bbff, type: 2}
+    - target: {fileID: 425558, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.63248575
+      objectReference: {fileID: 0}
+    - target: {fileID: 425558, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.37547126
+      objectReference: {fileID: 0}
     - target: {fileID: 444164, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0.57854766
@@ -390,18 +408,6 @@ PrefabInstance:
       propertyPath: m_LocalRotation.w
       value: -0.3754713
       objectReference: {fileID: 0}
-    - target: {fileID: 425558, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.63248575
-      objectReference: {fileID: 0}
-    - target: {fileID: 425558, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.37547126
-      objectReference: {fileID: 0}
-    - target: {fileID: 2369332, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c30a71e668c04244a81c8c9ccac9bbff, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
 --- !u!4 &7119712264274844330 stripped
