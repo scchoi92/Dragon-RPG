@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 803704244417688676}
   - component: {fileID: 7689061511321001650}
   - component: {fileID: 1408855966542607264}
+  - component: {fileID: 6921430347077226720}
   m_Layer: 12
   m_Name: Self Heal Particle
   m_TagString: Untagged
@@ -49,7 +50,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -991,7 +992,7 @@ ParticleSystem:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.39970243
+          time: 0.4754173
           value: 1
           inSlope: -0.54703885
           outSlope: -0.54703885
@@ -1024,8 +1025,8 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.42704824
-          value: 0.6088724
+          time: 0.49328664
+          value: 0.14094543
           inSlope: -0.462452
           outSlope: -0.462452
           tangentMode: 0
@@ -4717,6 +4718,19 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &6921430347077226720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880141550999592735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63f07f1f6254efd458fd2696e63c0bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 5
 --- !u!1 &9105929816532528126
 GameObject:
   m_ObjectHideFlags: 0
@@ -4765,7 +4779,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1

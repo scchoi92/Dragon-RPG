@@ -6,37 +6,28 @@ using System;
 
 namespace RPG.Characters
 {
-    public class AreaAttackBehaviour : MonoBehaviour, ISpecialAbility
+    public class AreaAttackBehaviour : AbilityBehaviour
     {
-        AreaAttackConfig config;
+        //private void Start()
+        //{
+        //    myAudioSource = GetComponent<AudioSource>();
+        //}
 
-        public void SetConfig(AreaAttackConfig configToSet)
-        {
-            this.config = configToSet;
-        }
-
-        private void Start()
-        {
-        }
-
-        public void Use(AbilityUseParams useParams)
+        public override void Use(AbilityUseParams useParams)
         {
             DealRadialDamage(useParams);
             PlayParticleEffect();
-        }
-
-        private void PlayParticleEffect()
-        {
-            Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
+            PlaySFX();
+            PlayAnimation();
         }
 
         private void DealRadialDamage(AbilityUseParams useParams)
         {
             RaycastHit[] hits = Physics.SphereCastAll(
                 transform.position,
-                config.GetEffectRadius(),
+                (config as AreaAttackConfig).GetEffectRadius(),
                 Vector3.up,
-                config.GetEffectRadius()
+                (config as AreaAttackConfig).GetEffectRadius()
                 );
 
             foreach (RaycastHit hit in hits)
@@ -45,10 +36,18 @@ namespace RPG.Characters
                 bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
                 if (damageable != null && !hitPlayer)
                 {
-                    float damageToDeal = useParams.baseDamage + config.GetDamageToEachTarget();
+                    float damageToDeal = useParams.baseDamage + (config as AreaAttackConfig).GetDamageToEachTarget();
                     damageable.AdjustHealth(damageToDeal);
                 }
             }
         }
+
+        //private void PlaySFX()
+        //{
+        //    myAudioSource.clip = config.GetSFX(); // TODO find way of moving audio to parent class
+        //    myAudioSource.volume = 0.15f;
+        //    myAudioSource.Play();
+        //}
+
     }
 }

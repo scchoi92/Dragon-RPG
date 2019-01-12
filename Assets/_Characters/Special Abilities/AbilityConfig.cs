@@ -23,37 +23,33 @@ namespace RPG.Characters
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
         [SerializeField] GameObject particlePrefab = null;
-        [SerializeField] AudioClip abilitySFX = null;
+        [SerializeField] bool attachParticleToUser = false;
+        [SerializeField] AudioClip[] abilitySFXs = null;
 
-        protected ISpecialAbility behaviour;
+        [SerializeField] string skillAnimationTrigger = null;
 
-        abstract public void AttachComponentTo(GameObject gameObjectToAttachTo);
+        protected AbilityBehaviour behaviour;
 
-        public void Use(AbilityUseParams useParams)
+        public abstract AbilityBehaviour GetBehaviourComponent(GameObject gameObjectToAttachTo);
+
+        public void AttachAbilityTo(GameObject gameObjectToAttachTo)
         {
-            behaviour.Use(useParams);
+            AbilityBehaviour behaviourComponent = GetBehaviourComponent(gameObjectToAttachTo);
+            behaviourComponent.SetConfig(this);
+            behaviour = behaviourComponent;
         }
 
-        public float GetEnergyCost()
-        {
-            return energyCost;
-        }
+        public void Use(AbilityUseParams useParams) { behaviour.Use(useParams); }
 
-        public GameObject GetParticlePrefab()
-        {
-            return particlePrefab;
-        }
+        public float GetEnergyCost() { return energyCost; }
 
-        public AudioClip GetSFX()
-        {
-            return abilitySFX;
-        }
+        public GameObject GetParticlePrefab() { return particlePrefab; }
+
+        public AudioClip GetRandomSFX() { return abilitySFXs[UnityEngine.Random.Range(0, abilitySFXs.Length)]; }
+
+        public bool GetAttachParticleToUser() { return attachParticleToUser; }
+
+        public string GetSkillAnimationTrigger() { return skillAnimationTrigger; }
     }
-
-    public interface ISpecialAbility
-    {
-        void Use(AbilityUseParams useParams);
-    }
-
 }
 

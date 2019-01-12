@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // TODO consider re-wiring
-using RPG.Core; 
-using RPG.Weapons;
+using RPG.Core;
 
 namespace RPG.Characters
 {
@@ -24,7 +23,6 @@ namespace RPG.Characters
 
         bool isAttacking = false;
 
-
         [SerializeField] GameObject projectileToUse;
         [SerializeField] GameObject projectileSocket;
         Vector3 aimOffset = new Vector3(0, 1.5f, 0f);
@@ -34,27 +32,16 @@ namespace RPG.Characters
 
         GameObject originalPosition;
         GameObject originalPositionHolder;
+        Animator myAnimator;
+        const string DEATH_TRIGGER = "Death";
+        bool isAlive = true;
+        [SerializeField] LayerMask corpseLayer;
+
         //[SerializeField] GameObject originalPositionHolder; // give a new tag for this "holder" and find it on Start()?
         //or, make empty script, add it to the holder, so it can be found using getcomponent?
 
-
-        public float healthAsPercentage
-        {
-            get
-            {
-                return currentHealthPoints / maxHealthPoints;
-            }
-        }
-
-        public void AdjustHealth(float damage)
-        {
-            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
-            if (currentHealthPoints <= 0) { Destroy(gameObject); }
-        }
-
         private void Awake()
         {
-
             originalPositionHolder = FindObjectOfType<OriginalPositionHolder>().gameObject;
         }
 
@@ -66,45 +53,72 @@ namespace RPG.Characters
             originalPosition = new GameObject(gameObject.name + " original position");
             originalPosition.transform.position = transform.position;
             originalPosition.transform.parent = originalPositionHolder.transform;
+            myAnimator = GetComponent<Animator>();
+        }
+
+        public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; }
+        }
+
+        public void AdjustHealth(float damage)
+        {
+            currentHealthPoints = Mathf.Clamp(currentHealthPoints - damage, 0f, maxHealthPoints);
+            if (currentHealthPoints <= Mathf.Epsilon)
+            {
+                ProcessEnemyDeath();
+            }
+        }
+
+        private void ProcessEnemyDeath()
+        {
+            aiCharacterControl.SetTarget(transform);    // Enemies won't move
+            CancelInvoke();                             // will stop attacking
+            isAlive = false;                            // won't do any action in Update()
+            gameObject.layer = corpseLayer;             // will be ignored in raycasting
+            myAnimator.SetTrigger(DEATH_TRIGGER);       // trigger death animation
+            Destroy(gameObject, 5f);                    // ...and destroy the object in 5 secs
         }
 
         private void Update()
         {
-            if(player.healthAsPercentage <=Mathf.Epsilon)
-            { StopAllCoroutines(); Destroy(this); }
-            float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
-            if (distanceToPlayer <= attackRadius && !isAttacking)
+            if (isAlive)
             {
-                isAttacking = true;
-                float randomisedDelay = Random.Range(firingPeriodInS - firingPeriodVariation, firingPeriodInS + firingPeriodVariation);
-                InvokeRepeating("FireProjectile", 0.25f, randomisedDelay); //TODO switch to couroutines
-                transform.LookAt(player.transform);
-            }
-
-            if (distanceToPlayer > attackRadius)
-            {
-                isAttacking = false;
-                CancelInvoke();
-            }
-
-            //if (distanceToPlayer <= noticeRadius && distanceToPlayer >= moveRadius) // 이줄부터 ->
-            //{
-            //    transform.LookAt(player.transform);
-            //}
-            //else // <- else까지 지워도됨
-            if (distanceToPlayer <= moveRadius)
-            {
-                aiCharacterControl.SetTarget(player.transform);
-                if (distanceToPlayer <= attackRadius)
+                if (player.healthAsPercentage <= Mathf.Epsilon)
+                { StopAllCoroutines(); Destroy(this); }
+                float distanceToPlayer = Vector3.Distance(player.transform.position, transform.position);
+                if (distanceToPlayer <= attackRadius && !isAttacking)
                 {
-                    aiCharacterControl.SetTarget(transform);
+                    isAttacking = true;
+                    float randomisedDelay = Random.Range(firingPeriodInS - firingPeriodVariation, firingPeriodInS + firingPeriodVariation);
+                    InvokeRepeating("FireProjectile", 0.25f, randomisedDelay); //TODO switch to couroutines
+                    transform.LookAt(player.transform);
+                }
+
+                if (distanceToPlayer > attackRadius)
+                {
+                    isAttacking = false;
+                    CancelInvoke();
+                }
+                
+                // 이줄부터 ->
+                //if (distanceToPlayer <= noticeRadius && distanceToPlayer >= moveRadius)
+                //{
+                //    transform.LookAt(player.transform);
+                //}
+                //else // <- else까지 지워도됨
+
+                if (distanceToPlayer <= moveRadius)
+                {
+                    aiCharacterControl.SetTarget(player.transform);
+                    if (distanceToPlayer <= attackRadius)
+                    {
+                        aiCharacterControl.SetTarget(transform);
+                    }
+                }
+                else if (distanceToPlayer >= noticeRadius)
+                {
+                    aiCharacterControl.SetTarget(originalPosition.transform);
                 }
             }
-            else if (distanceToPlayer >= noticeRadius)
-            {
-                aiCharacterControl.SetTarget(originalPosition.transform);
-            }
-
 
 
         }

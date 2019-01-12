@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Power Attack L1
   m_EditorClassIdentifier: 
   energyCost: 10
-  particlePrefab: {fileID: 6880141550999592735, guid: 48be4ee7107d0b040b029b67214bdd76,
+  particlePrefab: {fileID: 2741281205029947288, guid: ffb20bb2852e7e44c832dd5c4724aee0,
     type: 3}
+  attachParticleToUser: 0
+  abilitySFXs:
+  - {fileID: 8300000, guid: 8ede1bb91e8766c41a858a0ecf4e74c4, type: 3}
+  skillAnimationTrigger: Skill1
   extraDamage: 50

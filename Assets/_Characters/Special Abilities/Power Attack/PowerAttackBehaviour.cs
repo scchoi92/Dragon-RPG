@@ -4,38 +4,26 @@ using UnityEngine;
 
 namespace RPG.Characters
 {
-    public class PowerAttackBehaviour : MonoBehaviour, ISpecialAbility
+    public class PowerAttackBehaviour : AbilityBehaviour
     {
+        //AudioSource myAudioSource;
 
-        PowerAttackConfig config;
+        //private void Start()
+        //{
+        //    myAudioSource = GetComponent<AudioSource>();
+        //}
 
-        public void SetConfig(PowerAttackConfig configToSet)
-        {
-            this.config = configToSet;
-        }
-
-        private void Start()
-        {
-        }
-
-        public void Use(AbilityUseParams useParams)
+        public override void Use(AbilityUseParams useParams)
         {
             DealDamage(useParams);
             PlayParticleEffect();
+            PlaySFX();
+            PlayAnimation();
         }
-
-        private void PlayParticleEffect()
-        {
-            var prefab = Instantiate(config.GetParticlePrefab(), transform.position, Quaternion.identity);
-            ParticleSystem myParticleSystem = prefab.GetComponent<ParticleSystem>();
-            myParticleSystem.Play();
-            Destroy(prefab, myParticleSystem.main.duration + 2f);
-        }
-
 
         private void DealDamage(AbilityUseParams useParams)
         {
-            float damageToDeal = useParams.baseDamage + config.GetExtraDamage();
+            float damageToDeal = useParams.baseDamage + (config as PowerAttackConfig).GetExtraDamage();
             useParams.target.AdjustHealth(damageToDeal);
         }
     }

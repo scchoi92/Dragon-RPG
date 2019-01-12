@@ -73,6 +73,7 @@
     <Compile Include="Assets\_Characters\Player\Player.cs" />
     <Compile Include="Assets\_Characters\Player\PlayerHealthBar.cs" />
     <Compile Include="Assets\_Characters\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\_Characters\Special Abilities\AbilityBehaviour.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\AbilityConfig.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\Area Attack\AreaAttackBehaviour.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\Area Attack\AreaAttackConfig.cs" />
@@ -82,10 +83,14 @@
     <Compile Include="Assets\_Characters\Special Abilities\Self Heal\SelfHealBehaviour.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\Self Heal\SelfHealConfig.cs" />
     <Compile Include="Assets\_Characters\ThirdPersonCharacter.cs" />
+    <Compile Include="Assets\_Characters\Weapons\Ranged\Projectiles\Projectile.cs" />
+    <Compile Include="Assets\_Characters\Weapons\Weapon.cs" />
+    <Compile Include="Assets\_Characters\Weapons\WeaponPickupPoint.cs" />
     <Compile Include="Assets\_Core\AudioTrigger.cs" />
     <Compile Include="Assets\_Core\DestroyObject.cs" />
     <Compile Include="Assets\_Core\IDamageable.cs" />
     <Compile Include="Assets\_Core\SpinMe.cs" />
+    <Compile Include="Assets\_Environment\Particles\ParticleEffectsHolder.cs" />
     <Compile Include="Assets\_Environment\Water\Scripts\Displace.cs" />
     <Compile Include="Assets\_Environment\Water\Scripts\GerstnerDisplace.cs" />
     <Compile Include="Assets\_Environment\Water\Scripts\MeshContainer.cs" />
@@ -94,8 +99,6 @@
     <Compile Include="Assets\_Environment\Water\Scripts\Water.cs" />
     <Compile Include="Assets\_Environment\Water\Scripts\WaterBase.cs" />
     <Compile Include="Assets\_Environment\Water\Scripts\WaterTile.cs" />
-    <Compile Include="Assets\_Weapons\Ranged\Projectiles\Projectile.cs" />
-    <Compile Include="Assets\_Weapons\Weapon.cs" />
     <None Include="Assets\SKJ Particle Tutorial\Plugins\Effect\Shader\effect_distortion_mask.shader" />
     <None Include="Assets\SKJ Particle Tutorial\Plugins\Effect\Shader\ParticleAddSoftEffect.shader" />
     <None Include="Assets\SKJ Particle Tutorial\Plugins\Effect\Shader\Toon Blended Premmultiply.shader" />
@@ -103,7 +106,7 @@
     <None Include="Assets\_Environment\Water\Shaders\FXWaterPro.shader" />
     <None Include="Assets\SKJ Particle Tutorial\Plugins\Effect\Shader\ParticleAddEffect.shader" />
     <None Include="Assets\SETUP &amp; STANDARDS.txt" />
-    <None Include="Assets\_Weapons\Ranged\Projectiles\RollerBall\RollerBallGuidelines.txt" />
+    <None Include="Assets\_Characters\Weapons\Ranged\Projectiles\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\SKJ Particle Tutorial\Plugins\Effect\Shader\Toon Additive.shader" />
     <None Include="Assets\SKJ Particle Tutorial\Plugins\Effect\Shader\ParticleBlendEffect.shader" />
     <Reference Include="Unity.TextMeshPro.Editor">

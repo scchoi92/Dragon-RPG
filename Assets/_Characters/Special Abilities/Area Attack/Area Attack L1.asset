@@ -15,5 +15,9 @@ MonoBehaviour:
   energyCost: 10
   particlePrefab: {fileID: 2741281205029947288, guid: 411ea9f52473893469ac40f358a1f72e,
     type: 3}
+  attachParticleToUser: 0
+  abilitySFXs:
+  - {fileID: 8300000, guid: f720e3c7aecb94b47a8cfc80f78cb9ca, type: 3}
+  skillAnimationTrigger: Skill1
   effectRadius: 5
   damageToEachTarget: 50
