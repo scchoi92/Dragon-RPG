@@ -63,7 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\_CameraUI\CameraFollow.cs" />
     <Compile Include="Assets\_CameraUI\CameraRaycaster.cs" />
-    <Compile Include="Assets\_Characters\AICharacterControl.cs" />
+    <Compile Include="Assets\_Characters\CharacterMovement.cs" />
     <Compile Include="Assets\_Characters\Enemies\Enemy.cs" />
     <Compile Include="Assets\_Characters\Enemies\EnemyHealthBar.cs" />
     <Compile Include="Assets\_Characters\Enemies\EnemyUI.cs" />
@@ -72,7 +72,6 @@
     <Compile Include="Assets\_Characters\Player\HeadDeco.cs" />
     <Compile Include="Assets\_Characters\Player\Player.cs" />
     <Compile Include="Assets\_Characters\Player\PlayerHealthBar.cs" />
-    <Compile Include="Assets\_Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\AbilityBehaviour.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\AbilityConfig.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\Area Attack\AreaAttackBehaviour.cs" />

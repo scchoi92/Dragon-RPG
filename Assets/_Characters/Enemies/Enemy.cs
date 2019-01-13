@@ -27,7 +27,6 @@ namespace RPG.Characters
         [SerializeField] GameObject projectileSocket;
         Vector3 aimOffset = new Vector3(0, 1.5f, 0f);
 
-        AICharacterControl aiCharacterControl = null;
         Player player = null;
 
         GameObject originalPosition;
@@ -49,7 +48,6 @@ namespace RPG.Characters
         {
             currentHealthPoints = maxHealthPoints;
             player = FindObjectOfType<Player>();
-            aiCharacterControl = GetComponent<AICharacterControl>();
             originalPosition = new GameObject(gameObject.name + " original position");
             originalPosition.transform.position = transform.position;
             originalPosition.transform.parent = originalPositionHolder.transform;
@@ -70,7 +68,7 @@ namespace RPG.Characters
 
         private void ProcessEnemyDeath()
         {
-            aiCharacterControl.SetTarget(transform);    // Enemies won't move
+            //aiCharacterControl.SetTarget(transform);    // Enemies won't move
             CancelInvoke();                             // will stop attacking
             isAlive = false;                            // won't do any action in Update()
             gameObject.layer = corpseLayer;             // will be ignored in raycasting
@@ -108,15 +106,15 @@ namespace RPG.Characters
 
                 if (distanceToPlayer <= moveRadius)
                 {
-                    aiCharacterControl.SetTarget(player.transform);
+                    //aiCharacterControl.SetTarget(player.transform);
                     if (distanceToPlayer <= attackRadius)
                     {
-                        aiCharacterControl.SetTarget(transform);
+                        //aiCharacterControl.SetTarget(transform);
                     }
                 }
                 else if (distanceToPlayer >= noticeRadius)
                 {
-                    aiCharacterControl.SetTarget(originalPosition.transform);
+                    //aiCharacterControl.SetTarget(originalPosition.transform);
                 }
             }
 

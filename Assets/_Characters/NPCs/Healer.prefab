@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 13615390}
   - component: {fileID: 1048837485212378171}
   - component: {fileID: 11469404}
-  - component: {fileID: 2635337557755789439}
   - component: {fileID: 114179726730965602}
   m_Layer: 10
   m_Name: Healer
@@ -132,19 +131,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0.3
   m_AnimSpeedMultiplier: 3.3
   m_GroundCheckDistance: 0.5
---- !u!114 &2635337557755789439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 149790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c5335f0882fe4d478883cc8c58ce906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
 --- !u!114 &114179726730965602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,10 +148,14 @@ MonoBehaviour:
   noticeRadius: 3
   attackRadius: 3
   damagePerShot: -1000
-  secondsBtwShots: 2
+  firingPeriodInS: 0.5
+  firingPeriodVariation: 0.1
   projectileToUse: {fileID: 5568995494451314956, guid: 5f5c8873c2635bb4781fd5f1876c9508,
     type: 3}
   projectileSocket: {fileID: 3155004295432774757}
+  corpseLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1090461992064662
 GameObject:
   m_ObjectHideFlags: 0

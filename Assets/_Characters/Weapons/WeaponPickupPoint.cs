@@ -6,7 +6,7 @@ using RPG.Characters;
 
 namespace RPG.Characters
 {
-    [ExecuteInEditMode]
+    //[ExecuteInEditMode]
     public class WeaponPickupPoint : MonoBehaviour
     {
         [SerializeField] Weapon weaponConfig;
