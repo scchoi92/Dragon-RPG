@@ -8,20 +8,22 @@ namespace RPG.Characters
 {
     public class AreaAttackBehaviour : AbilityBehaviour
     {
-        //private void Start()
-        //{
-        //    myAudioSource = GetComponent<AudioSource>();
-        //}
+        PlayerMovement player;
 
-        public override void Use(AbilityUseParams useParams)
+        private void Start()
         {
-            DealRadialDamage(useParams);
+            player = GetComponent<PlayerMovement>();
+        }
+
+        public override void Use(GameObject target)
+        {
+            DealRadialDamage();
             PlayParticleEffect();
             PlaySFX();
             PlayAnimation();
         }
 
-        private void DealRadialDamage(AbilityUseParams useParams)
+        private void DealRadialDamage()
         {
             RaycastHit[] hits = Physics.SphereCastAll(
                 transform.position,
@@ -32,11 +34,11 @@ namespace RPG.Characters
 
             foreach (RaycastHit hit in hits)
             {
-                var damageable = hit.collider.gameObject.GetComponent<IDamageable>();
-                bool hitPlayer = hit.collider.gameObject.GetComponent<Player>();
+                var damageable = hit.collider.gameObject.GetComponent<HealthSystem>();
+                bool hitPlayer = hit.collider.gameObject.GetComponent<PlayerMovement>();
                 if (damageable != null && !hitPlayer)
                 {
-                    float damageToDeal = useParams.baseDamage + (config as AreaAttackConfig).GetDamageToEachTarget();
+                    float damageToDeal = player.GetDamageBeforeCritical() + (config as AreaAttackConfig).GetDamageToEachTarget();
                     damageable.AdjustHealth(damageToDeal);
                 }
             }

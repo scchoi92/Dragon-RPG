@@ -882,7 +882,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4299091440119382, guid: b6dcadcb8a931c44f9cd96f1f83c5126, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.32
+      value: 5.8
       objectReference: {fileID: 0}
     - target: {fileID: 4299091440119382, guid: b6dcadcb8a931c44f9cd96f1f83c5126, type: 3}
       propertyPath: m_LocalPosition.y
@@ -890,7 +890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4299091440119382, guid: b6dcadcb8a931c44f9cd96f1f83c5126, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -49.2
+      value: -48.76
       objectReference: {fileID: 0}
     - target: {fileID: 4299091440119382, guid: b6dcadcb8a931c44f9cd96f1f83c5126, type: 3}
       propertyPath: m_LocalRotation.x
@@ -16655,6 +16655,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 376946593}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1743911142558920, guid: 45f9d06bf6c17514a9a4af48535692f0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -16708,27 +16712,22 @@ PrefabInstance:
       propertyPath: energyOrb
       value: 
       objectReference: {fileID: 1080752712}
+    - target: {fileID: 3835233738092184274, guid: 45f9d06bf6c17514a9a4af48535692f0,
+        type: 3}
+      propertyPath: energyBarImage
+      value: 
+      objectReference: {fileID: 1080752712}
     - target: {fileID: 114210096228230938, guid: 45f9d06bf6c17514a9a4af48535692f0,
         type: 3}
       propertyPath: currentWeaponConfig
       value: 
       objectReference: {fileID: 11400000, guid: e79800f173b966c48bac8d8a68b82219,
         type: 2}
-    - target: {fileID: 4792539421994836130, guid: 45f9d06bf6c17514a9a4af48535692f0,
+    - target: {fileID: 8514963605803237307, guid: 45f9d06bf6c17514a9a4af48535692f0,
         type: 3}
-      propertyPath: moveSpeedMultiplier
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4792539421994836130, guid: 45f9d06bf6c17514a9a4af48535692f0,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114813121667576072, guid: 45f9d06bf6c17514a9a4af48535692f0,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 1.5
-      objectReference: {fileID: 0}
+      propertyPath: healthBarImage
+      value: 
+      objectReference: {fileID: 1880350030}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45f9d06bf6c17514a9a4af48535692f0, type: 3}
 --- !u!1001 &1743150701
@@ -17589,6 +17588,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1846948234}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1880350030 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3953068054233045516, guid: 75a43cca039264395b99698681e52275,
+    type: 3}
+  m_PrefabInstance: {fileID: 2079219672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1887284579
 PrefabInstance:
   m_ObjectHideFlags: 0

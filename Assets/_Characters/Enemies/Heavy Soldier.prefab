@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 989218843}
   - component: {fileID: 989218842}
   - component: {fileID: 989218841}
-  - component: {fileID: 989218840}
   - component: {fileID: 989218838}
   m_Layer: 10
   m_Name: Heavy Soldier
@@ -110,26 +109,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &989218840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989218837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce7a80d520cacc042b5fe14f373d8173, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MovingTurnSpeed: 1800
-  m_StationaryTurnSpeed: 1800
-  m_JumpPower: 15
-  m_GravityMultiplier: 2
-  m_RunCycleLegOffset: 0.2
-  m_MoveSpeedMultiplier: 0.6
-  m_AnimSpeedMultiplier: 0.3
-  m_GroundCheckDistance: 0.5
 --- !u!114 &989218838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,7 +121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 604c3458ddcc4f642aa281a7f64f59f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 350
   moveRadius: 8
   noticeRadius: 15
   attackRadius: 1.7
@@ -152,9 +130,6 @@ MonoBehaviour:
   projectileToUse: {fileID: 5568995494451314956, guid: 0701df119c6e7e244ad4ccf4e412d649,
     type: 3}
   projectileSocket: {fileID: 1540165132}
-  corpseLayer:
-    serializedVersion: 2
-    m_Bits: 2
 --- !u!1 &1540165132
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +267,10 @@ PrefabInstance:
     - target: {fileID: 198420, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
       propertyPath: m_Layer
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 198420, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 153244, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
       propertyPath: m_Layer

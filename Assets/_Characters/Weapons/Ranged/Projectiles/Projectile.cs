@@ -28,32 +28,22 @@ namespace RPG.Characters
             damageCaused = damage;
         }
 
-
-        //private void OnCollisionEnter(Collision collision)
+        //private void DamageIfDamageable(Collider collision)
         //{
-        //    var layerCollidedWith = collision.gameObject.layer;
-        //    if (layerCollidedWith != shooter.layer)
+        //    Component damageableComponent = collision.gameObject.GetComponent(typeof(HealthSystem));
+        //    if (damageableComponent)
         //    {
-        //        DamageIfDamageable(collision);
+        //        (damageableComponent as HealthSystem).AdjustHealth(damageCaused);
+        //        Destroy(gameObject, DESTROY_DELAY);
         //    }
         //}
-
-        private void DamageIfDamageable(Collider collision)
-        {
-            Component damageableComponent = collision.gameObject.GetComponent(typeof(IDamageable));
-            if (damageableComponent)
-            {
-                (damageableComponent as IDamageable).AdjustHealth(damageCaused);
-                Destroy(gameObject, DESTROY_DELAY);
-            }
-        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (shooter == null) { return; }
             if (other.gameObject.layer != shooter.layer)
             {
-                DamageIfDamageable(other);
+                //DamageIfDamageable(other);
             }
         }
 

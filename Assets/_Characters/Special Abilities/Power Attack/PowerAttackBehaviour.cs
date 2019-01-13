@@ -6,25 +6,25 @@ namespace RPG.Characters
 {
     public class PowerAttackBehaviour : AbilityBehaviour
     {
-        //AudioSource myAudioSource;
+        PlayerMovement player;
 
-        //private void Start()
-        //{
-        //    myAudioSource = GetComponent<AudioSource>();
-        //}
-
-        public override void Use(AbilityUseParams useParams)
+        private void Start()
         {
-            DealDamage(useParams);
+            player = GetComponent<PlayerMovement>();
+        }
+
+        public override void Use(GameObject target)
+        {
+            DealDamage(target);
             PlayParticleEffect();
             PlaySFX();
             PlayAnimation();
         }
 
-        private void DealDamage(AbilityUseParams useParams)
+        private void DealDamage(GameObject target)
         {
-            float damageToDeal = useParams.baseDamage + (config as PowerAttackConfig).GetExtraDamage();
-            useParams.target.AdjustHealth(damageToDeal);
+            float damageToDeal = player.GetDamageBeforeCritical() + (config as PowerAttackConfig).GetExtraDamage();
+            target.GetComponent<HealthSystem>().AdjustHealth(damageToDeal);
         }
     }
 }

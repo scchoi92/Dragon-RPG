@@ -8,23 +8,23 @@ namespace RPG.Characters
 {
     public class SelfHealBehaviour : AbilityBehaviour
     {
-        Player player;
+        HealthSystem healthSystem;
 
         private void Start()
         {
-            player = GetComponent<Player>();
+            healthSystem = GetComponent<HealthSystem>();
         }
 
-        public override void Use(AbilityUseParams useParams)
+        public override void Use(GameObject target)
         {
-            ProcessHeal(useParams);
+            ProcessHeal();
             PlayParticleEffect();
             PlaySFX();
         }
 
-        private void ProcessHeal(AbilityUseParams useParams)
+        private void ProcessHeal()
         {
-            player.SetHealTimer((config as SelfHealConfig).GetDuration(), (config as SelfHealConfig).GetHealAmount());
+            healthSystem.SetHealTimer((config as SelfHealConfig).GetDuration(), (config as SelfHealConfig).GetHealAmount());
         }
     }
 }

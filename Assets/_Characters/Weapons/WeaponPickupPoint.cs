@@ -46,7 +46,7 @@ namespace RPG.Characters
 
         private void OnTriggerEnter(Collider other)
         {
-            FindObjectOfType<Player>().PutWeaponInHand(weaponConfig);
+            FindObjectOfType<PlayerMovement>().PutWeaponInHand(weaponConfig);
             myAudioSource.PlayOneShot(pickUpSFX);
         }
     }
