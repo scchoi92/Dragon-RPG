@@ -7,11 +7,8 @@ namespace RPG.Characters
     {
         protected AbilityConfig config;
 
-        private void Awake()
-        {
-            
-        }
-
+        const string ATTACK_TRIGGER = "Attack";
+        const string DEFAULT_ATTACK_STATE = "DEFAULT ATTACK";
         public abstract void Use(GameObject target = null);
 
         public void SetConfig(AbilityConfig configToSet)
@@ -33,18 +30,20 @@ namespace RPG.Characters
             }
         }
 
+        protected void PlayAbilityAnimation()
+        {
+            var animatorOverrideController = GetComponent<Character>().GetOverrideController();
+            var animator = GetComponent<Animator>();
+            animator.runtimeAnimatorController = animatorOverrideController;
+            animatorOverrideController[DEFAULT_ATTACK_STATE] = config.GetAbilityAnimation();
+            animator.SetTrigger(ATTACK_TRIGGER);
+        }
+
         protected void PlaySFX()
         {
             var myAudioSource = GetComponent<AudioSource>();
             var abilitySFX = config.GetRandomSFX(); // TODO change to random clip
             myAudioSource.PlayOneShot(abilitySFX);
         }
-
-        protected void PlayAnimation()
-        {
-            var myAnimator = gameObject.GetComponent<Animator>();
-            myAnimator.SetTrigger(config.GetSkillAnimationTrigger());
-        }
-
     }
 }

@@ -20,7 +20,7 @@ namespace RPG.Characters
             DealRadialDamage();
             PlayParticleEffect();
             PlaySFX();
-            PlayAnimation();
+            PlayAbilityAnimation();
         }
 
         private void DealRadialDamage()
@@ -39,7 +39,7 @@ namespace RPG.Characters
                 if (damageable != null && !hitPlayer)
                 {
                     float damageToDeal = weaponSystem.GetDamageBeforeCritical() + (config as AreaAttackConfig).GetDamageToEachTarget();
-                    damageable.AdjustHealth(damageToDeal);
+                    damageable.TakeDamage(damageToDeal);
                 }
             }
         }

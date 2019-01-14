@@ -65,12 +65,12 @@
     <Compile Include="Assets\_CameraUI\CameraRaycaster.cs" />
     <Compile Include="Assets\_Characters\Enemies\EnemyAI.cs" />
     <Compile Include="Assets\_Characters\Enemies\EnemyUI.cs" />
-    <Compile Include="Assets\_Characters\Enemies\OriginalPositionHolder.cs" />
     <Compile Include="Assets\_Characters\Player\DominantHand.cs" />
     <Compile Include="Assets\_Characters\Player\HeadDeco.cs" />
     <Compile Include="Assets\_Characters\Player\PlayerMovement.cs" />
     <Compile Include="Assets\_Characters\Script\Character.cs" />
     <Compile Include="Assets\_Characters\Script\HealthSystem.cs" />
+    <Compile Include="Assets\_Characters\Script\WaypointContainer.cs" />
     <Compile Include="Assets\_Characters\Script\WeaponSystem.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\AbilityBehaviour.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\AbilityConfig.cs" />

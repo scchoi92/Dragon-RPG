@@ -18,13 +18,13 @@ namespace RPG.Characters
             DealDamage(target);
             PlayParticleEffect();
             PlaySFX();
-            PlayAnimation();
+            PlayAbilityAnimation();
         }
 
         private void DealDamage(GameObject target)
         {
             float damageToDeal = weaponSystem.GetDamageBeforeCritical() + (config as PowerAttackConfig).GetExtraDamage();
-            target.GetComponent<HealthSystem>().AdjustHealth(damageToDeal);
+            target.GetComponent<HealthSystem>().TakeDamage(damageToDeal);
         }
     }
 }

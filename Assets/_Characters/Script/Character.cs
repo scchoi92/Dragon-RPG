@@ -52,6 +52,11 @@ namespace RPG.Characters
             }
         }
 
+        public float GetAnimatorSpeedMultiplier()
+        {
+            return myAnimator.speed;
+        }
+
         public void Kill()
         {
             isAlive = false;

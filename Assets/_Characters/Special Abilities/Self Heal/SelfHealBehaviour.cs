@@ -20,6 +20,7 @@ namespace RPG.Characters
             ProcessHeal();
             PlayParticleEffect();
             PlaySFX();
+            PlayAbilityAnimation();
         }
 
         private void ProcessHeal()

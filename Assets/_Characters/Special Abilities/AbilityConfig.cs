@@ -11,10 +11,9 @@ namespace RPG.Characters
         [Header("Special Ability General")]
         [SerializeField] float energyCost = 10f;
         [SerializeField] GameObject particlePrefab = null;
+        [SerializeField] AnimationClip abiltiyAnimation;
         [SerializeField] bool attachParticleToUser = false;
         [SerializeField] AudioClip[] abilitySFXs = null;
-
-        [SerializeField] string skillAnimationTrigger = null;
 
         protected AbilityBehaviour behaviour;
 
@@ -33,11 +32,11 @@ namespace RPG.Characters
 
         public GameObject GetParticlePrefab() { return particlePrefab; }
 
+        public AnimationClip GetAbilityAnimation() { return abiltiyAnimation; }
+
         public AudioClip GetRandomSFX() { return abilitySFXs[UnityEngine.Random.Range(0, abilitySFXs.Length)]; }
 
         public bool GetAttachParticleToUser() { return attachParticleToUser; }
-
-        public string GetSkillAnimationTrigger() { return skillAnimationTrigger; }
     }
 }
 

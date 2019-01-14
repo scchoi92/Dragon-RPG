@@ -15,6 +15,7 @@ MonoBehaviour:
   energyCost: 10
   particlePrefab: {fileID: 6880141550999592735, guid: 83c5a5fed983ea842bb0ac27569af052,
     type: 3}
+  abiltiyAnimation: {fileID: 7400000, guid: 08061e875324be84496c2c8dd94801b1, type: 3}
   attachParticleToUser: 1
   abilitySFXs:
   - {fileID: 8300000, guid: e26c067eea1209248a4af023b64e3485, type: 3}

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 namespace RPG.Characters
 {
+    [RequireComponent(typeof(AudioSource))]
     public class HealthSystem : MonoBehaviour
     {
         [SerializeField] float maxHealthPoints = 100f;
@@ -59,7 +60,7 @@ namespace RPG.Characters
             }
         }
 
-        public void AdjustHealth(float damage)
+        public void TakeDamage(float damage)
         {
             bool characterDies = (currentHealthPoints - damage <= 0);
             ReduceHealth(damage);

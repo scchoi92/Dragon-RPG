@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.Assertions;
 using UnityEngine;
 
@@ -21,10 +20,7 @@ namespace RPG.Characters
 
         const string ATTACK_TRIGGER = "Attack";
         const string DEFAULT_ATTACK = "DEFAULT ATTACK";
-
         
-
-
         void Start()
         {
             animator = GetComponent<Animator>();
@@ -36,7 +32,30 @@ namespace RPG.Characters
 
         void Update()
         {
+            bool targetIsDead;
+            bool targetIsOutOfRange;
 
+            if (target == null)
+            {
+                targetIsDead = false;
+                targetIsOutOfRange = false;
+            }
+            else
+            {
+                var targetHealth = target.GetComponent<HealthSystem>().healthAsPercentage;
+                targetIsDead = targetHealth <= Mathf.Epsilon;
+
+                var distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
+                targetIsOutOfRange = distanceToTarget > currentWeaponConfig.GetMaxAttackRange();
+            }
+
+            float characterHealth = GetComponent<HealthSystem>().healthAsPercentage;
+            bool characterIsDead = (characterHealth <= Mathf.Epsilon);
+
+            if(characterIsDead || targetIsOutOfRange || targetIsDead)
+            {
+                StopAllCoroutines();
+            }
         }
 
         public void PutWeaponInHand(WeaponConfig weaponToUse)
@@ -64,14 +83,54 @@ namespace RPG.Characters
         public void AttackTarget(GameObject targetToAttack)
         {
             target = targetToAttack;
-            print("Attacking " + targetToAttack);
-            // todo use a repeat attack co-routine
+            StartCoroutine(AttackTargetRepeatedly());
             
+        }
+
+        IEnumerator AttackTargetRepeatedly()
+        {
+            bool attackerStillAlive = GetComponent<HealthSystem>().healthAsPercentage >= Mathf.Epsilon;
+            bool targetStillAlive = target.GetComponent<HealthSystem>().healthAsPercentage >= Mathf.Epsilon;
+
+            while (attackerStillAlive && targetStillAlive)
+            {
+                float weaponHitPeriod = currentWeaponConfig.GetMinTimeBtwHits();
+                float timeToWait = weaponHitPeriod * character.GetAnimatorSpeedMultiplier();
+
+                bool isTimeToHitAgain = Time.time - lastHitTime > timeToWait;
+
+                if (isTimeToHitAgain)
+                {
+                    AttackTargetOnce();
+                }
+                yield return new WaitForSeconds(timeToWait);
+            }
+            
+        }
+
+        private void AttackTargetOnce()
+        {
+            transform.LookAt(target.transform);
+            animator.SetTrigger(ATTACK_TRIGGER);
+            float damageDelay = 0.3f;//todo get from weaponitself
+            SetAttackAnimation();
+            StartCoroutine(DamageAfterDelay(damageDelay));
+            lastHitTime = Time.time;
+        }
+
+        IEnumerator DamageAfterDelay(float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            target.GetComponent<HealthSystem>().TakeDamage(CalculateDamage());
         }
 
         private void SetAttackAnimation()
         {
-            animator = GetComponent<Animator>();
+            if (!character.GetOverrideController())
+            {
+                Debug.Break();
+                Debug.LogAssertion("Please provide " + gameObject + "with an animator override controller");
+            }
             var animatorOverrideController = character.GetOverrideController();
             animator.runtimeAnimatorController = animatorOverrideController;
             animatorOverrideController[DEFAULT_ATTACK] = currentWeaponConfig.GetAttackAnimClip(); // TODO remove const
@@ -94,19 +153,6 @@ namespace RPG.Characters
             Assert.AreNotEqual(numberOfDominantHands, 0, "No DominantHand found on player. Please add one.");
             Assert.IsFalse(numberOfDominantHands > 1, "Multiple DominantHand scripts on player. Please remove one.");
             return dominantHands[0].gameObject;
-        }
-
-
-
-        private void AttackTarget() // todo use co-routines
-        {
-            if (Time.time - lastHitTime > currentWeaponConfig.GetMinTimeBtwHits())
-            {
-                SetAttackAnimation();
-                transform.LookAt(target.transform);
-                animator.SetTrigger(ATTACK_TRIGGER); 
-                lastHitTime = Time.time;
-            }
         }
 
         public WeaponConfig GetCurrentWeapon()
