@@ -8,11 +8,11 @@ namespace RPG.Characters
 {
     public class AreaAttackBehaviour : AbilityBehaviour
     {
-        PlayerMovement player;
+        WeaponSystem weaponSystem;
 
         private void Start()
         {
-            player = GetComponent<PlayerMovement>();
+            weaponSystem = GetComponent<WeaponSystem>();
         }
 
         public override void Use(GameObject target)
@@ -38,7 +38,7 @@ namespace RPG.Characters
                 bool hitPlayer = hit.collider.gameObject.GetComponent<PlayerMovement>();
                 if (damageable != null && !hitPlayer)
                 {
-                    float damageToDeal = player.GetDamageBeforeCritical() + (config as AreaAttackConfig).GetDamageToEachTarget();
+                    float damageToDeal = weaponSystem.GetDamageBeforeCritical() + (config as AreaAttackConfig).GetDamageToEachTarget();
                     damageable.AdjustHealth(damageToDeal);
                 }
             }

@@ -63,14 +63,15 @@
   <ItemGroup>
     <Compile Include="Assets\_CameraUI\CameraFollow.cs" />
     <Compile Include="Assets\_CameraUI\CameraRaycaster.cs" />
-    <Compile Include="Assets\_Characters\CharacterMovement.cs" />
-    <Compile Include="Assets\_Characters\Enemies\Enemy.cs" />
+    <Compile Include="Assets\_Characters\Enemies\EnemyAI.cs" />
     <Compile Include="Assets\_Characters\Enemies\EnemyUI.cs" />
     <Compile Include="Assets\_Characters\Enemies\OriginalPositionHolder.cs" />
-    <Compile Include="Assets\_Characters\HealthSystem.cs" />
     <Compile Include="Assets\_Characters\Player\DominantHand.cs" />
     <Compile Include="Assets\_Characters\Player\HeadDeco.cs" />
     <Compile Include="Assets\_Characters\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\_Characters\Script\Character.cs" />
+    <Compile Include="Assets\_Characters\Script\HealthSystem.cs" />
+    <Compile Include="Assets\_Characters\Script\WeaponSystem.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\AbilityBehaviour.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\AbilityConfig.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\Area Attack\AreaAttackBehaviour.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="Assets\_Characters\Special Abilities\Self Heal\SelfHealConfig.cs" />
     <Compile Include="Assets\_Characters\Special Abilities\SpecialAbilities.cs" />
     <Compile Include="Assets\_Characters\Weapons\Ranged\Projectiles\Projectile.cs" />
-    <Compile Include="Assets\_Characters\Weapons\Weapon.cs" />
+    <Compile Include="Assets\_Characters\Weapons\WeaponConfig.cs" />
     <Compile Include="Assets\_Characters\Weapons\WeaponPickupPoint.cs" />
     <Compile Include="Assets\_Core\AudioTrigger.cs" />
     <Compile Include="Assets\_Core\DestroyObject.cs" />

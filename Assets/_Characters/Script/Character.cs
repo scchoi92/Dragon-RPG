@@ -6,13 +6,15 @@ using RPG.CameraUI;
 namespace RPG.Characters
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class CharacterMovement : MonoBehaviour
+    public class Character : MonoBehaviour
     {
         [SerializeField] float stoppingDistance = 1f;
         [SerializeField] float moveSpeedMultiplier = 1f;
         [SerializeField] float animatorSpeedMultiplier = 1f;
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
+        [SerializeField] AnimatorOverrideController animatorOverrideController;
+
         float moveThreshold = 1f;
 
         Vector3 clickPoint;
@@ -60,6 +62,11 @@ namespace RPG.Characters
             navMeshAgent.destination = worldPos;
         }
 
+        public AnimatorOverrideController GetOverrideController()
+        {
+            return animatorOverrideController;
+        }
+
         void Move(Vector3 movement)
         {
             SetForwardAndTurn(movement);
@@ -93,7 +100,7 @@ namespace RPG.Characters
             transform.Rotate(0, turnAmount * turnSpeed * Time.deltaTime, 0);
         }
 
-        void OnMouseOverEnemy(Enemy enemy)
+        void OnMouseOverEnemy(EnemyAI enemy)
         {
             if (Input.GetMouseButton(0) || Input.GetMouseButtonDown(1))
             {

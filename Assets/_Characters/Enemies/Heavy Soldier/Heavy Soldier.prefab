@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 989218842}
   - component: {fileID: 989218841}
   - component: {fileID: 989218838}
+  - component: {fileID: 169458719}
+  - component: {fileID: 3032533827515257238}
   m_Layer: 10
   m_Name: Heavy Soldier
   m_TagString: Enemy
@@ -28,13 +30,11 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989218837}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.6395264, y: 6.9912033, z: -37.139465}
   m_LocalScale: {x: 1.75, y: 1.75, z: 1.75}
   m_Children:
   - {fileID: 2812340735434082447}
-  - {fileID: 1732228727}
-  - {fileID: 1540165133}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -123,88 +123,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveRadius: 8
   noticeRadius: 15
-  attackRadius: 1.7
-  damagePerShot: 60
-  firingPeriodInS: 0.5
-  firingPeriodVariation: 0.1
-  projectileToUse: {fileID: 5568995494451314956, guid: 0701df119c6e7e244ad4ccf4e412d649,
-    type: 3}
-  projectileSocket: {fileID: 1540165132}
---- !u!1 &1540165132
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1540165133}
-  m_Layer: 2
-  m_Name: Projectile Spawn Point
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1540165133
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540165132}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.6, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1565624577}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1732228726
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1732228727}
-  - component: {fileID: 1732228728}
-  m_Layer: 2
-  m_Name: UI Socket
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1732228727
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732228726}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1565624577}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1732228728
+--- !u!114 &169458719
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1732228726}
+  m_GameObject: {fileID: 989218837}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1946e1c1bae1c34ba2666ebb3463952, type: 3}
+  m_Script: {fileID: 11500000, guid: 86a0e6560b238c74fb969748863c595b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyCanvasPrefab: {fileID: 1311539807392560, guid: 9a9d70d10b9331d469e57254147e0430,
-    type: 3}
+  baseDamage: 17
+  currentWeaponConfig: {fileID: 11400000, guid: 740d89ef9676a2b4995c8c5170b6ce7a,
+    type: 2}
+  criticalHitChance: 0.1
+  criticalHitMultiplier: 2
+  critParticle: {fileID: 0}
+--- !u!114 &3032533827515257238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989218837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01a0d77d32e6aa442b0e1400c4df0ccb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stoppingDistance: 1
+  moveSpeedMultiplier: 1
+  animatorSpeedMultiplier: 1
+  movingTurnSpeed: 360
+  stationaryTurnSpeed: 180
+  animatorOverrideController: {fileID: 22100000, guid: 384d21bd4562f1a429e4f8544da70f20,
+    type: 2}
 --- !u!1001 &2812340735434463223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -267,10 +222,6 @@ PrefabInstance:
     - target: {fileID: 198420, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
       propertyPath: m_Layer
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 198420, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 153244, guid: 30cf93deff988e74e88a144bd2127c18, type: 3}
       propertyPath: m_Layer

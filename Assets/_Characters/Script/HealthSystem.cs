@@ -21,7 +21,7 @@ namespace RPG.Characters
         float currentHealthPoints;
         Animator myAnimator;
         AudioSource myAudioSource;
-        CharacterMovement characterMovement;
+        Character characterMovement;
 
         
         // 셀프힐용 따로 작업한 거
@@ -36,7 +36,7 @@ namespace RPG.Characters
             currentHealthPoints = maxHealthPoints;
             myAnimator = GetComponent<Animator>();
             myAudioSource = GetComponent<AudioSource>();
-            characterMovement = GetComponent<CharacterMovement>();
+            characterMovement = GetComponent<Character>();
         }
 
         public float healthAsPercentage { get { return currentHealthPoints / maxHealthPoints; } }

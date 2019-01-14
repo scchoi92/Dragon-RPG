@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 114210096228230938}
   - component: {fileID: 3835233738092184274}
   - component: {fileID: 8514963605803237307}
+  - component: {fileID: 5703620530783560076}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -224,6 +225,8 @@ MonoBehaviour:
   animatorSpeedMultiplier: 1.5
   movingTurnSpeed: 360
   stationaryTurnSpeed: 180
+  animatorOverrideController: {fileID: 22100000, guid: a3f55f6b7aa2a6444bcfc78aa4f918e3,
+    type: 2}
 --- !u!114 &114210096228230938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,14 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40f6d0d9151d6e44f83017e81f82feee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 17
-  currentWeaponConfig: {fileID: 0}
-  animatorOverrideController: {fileID: 22100000, guid: a3f55f6b7aa2a6444bcfc78aa4f918e3,
-    type: 2}
-  criticalHitChance: 0.15
-  criticalHitMultiplier: 4
-  critParticle: {fileID: 8593406276937859608, guid: 8bddd502f0edc684aa418d49fdb2febc,
-    type: 3}
 --- !u!114 &3835233738092184274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +277,24 @@ MonoBehaviour:
   deathSounds: []
   deathVanishDelay: 5
   healPerSec: 0
+--- !u!114 &5703620530783560076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743911142558920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a0e6560b238c74fb969748863c595b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 17
+  currentWeaponConfig: {fileID: 0}
+  criticalHitChance: 0.1
+  criticalHitMultiplier: 2
+  critParticle: {fileID: 8593406276937859608, guid: 8bddd502f0edc684aa418d49fdb2febc,
+    type: 3}
 --- !u!114 &8177009611624199456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,18 +305,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 977eaa8cda949ae4c9b3511c101c39c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6372935504062582625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7119712264275157806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a1219fb172574841af1d002bfcd4dad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7119712264275248594
@@ -402,12 +403,6 @@ PrefabInstance:
 --- !u!4 &7119712264274844330 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 417656, guid: 30cf93deff988e74e88a144bd2127c18,
-    type: 3}
-  m_PrefabInstance: {fileID: 7119712264275248594}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7119712264275157806 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 173820, guid: 30cf93deff988e74e88a144bd2127c18,
     type: 3}
   m_PrefabInstance: {fileID: 7119712264275248594}
   m_PrefabAsset: {fileID: 0}

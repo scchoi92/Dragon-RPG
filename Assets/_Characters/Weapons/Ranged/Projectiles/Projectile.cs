@@ -15,7 +15,7 @@ namespace RPG.Characters
 
         const float DESTROY_DELAY = 0.01f;
 
-        float damageCaused;
+        //float damageCaused;
 
         public void SetShooter(GameObject shooter)
         {
@@ -23,10 +23,10 @@ namespace RPG.Characters
         }
 
 
-        public void SetDamage(float damage)
-        {
-            damageCaused = damage;
-        }
+        //public void SetDamage(float damage)
+        //{
+        //    damageCaused = damage;
+        //}
 
         //private void DamageIfDamageable(Collider collision)
         //{

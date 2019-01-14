@@ -6,11 +6,11 @@ namespace RPG.Characters
 {
     public class PowerAttackBehaviour : AbilityBehaviour
     {
-        PlayerMovement player;
+        WeaponSystem weaponSystem;
 
         private void Start()
         {
-            player = GetComponent<PlayerMovement>();
+            weaponSystem = GetComponent<WeaponSystem>();
         }
 
         public override void Use(GameObject target)
@@ -23,7 +23,7 @@ namespace RPG.Characters
 
         private void DealDamage(GameObject target)
         {
-            float damageToDeal = player.GetDamageBeforeCritical() + (config as PowerAttackConfig).GetExtraDamage();
+            float damageToDeal = weaponSystem.GetDamageBeforeCritical() + (config as PowerAttackConfig).GetExtraDamage();
             target.GetComponent<HealthSystem>().AdjustHealth(damageToDeal);
         }
     }
