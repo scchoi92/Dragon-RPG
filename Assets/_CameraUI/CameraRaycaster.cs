@@ -6,7 +6,7 @@ using RPG.Characters; // so we can detect by type
 
 namespace RPG.CameraUI
 {
-    public class CameraRaycaster : MonoBehaviour //TODO rename Cursor
+    public class CameraRaycaster : MonoBehaviour
     {
         [SerializeField] Texture2D enemyCursor;
         [SerializeField] Texture2D walkCursor;

@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 20022654306224838}
   - component: {fileID: 81855835847276082}
   - component: {fileID: 8118283490620274536}
-  - component: {fileID: 114294829368660586}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -27,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172424776519886}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0.13, y: 10, z: -11.73}
+  m_LocalRotation: {x: 0.42261827, y: 0, z: 0, w: 0.9063079}
+  m_LocalPosition: {x: 0, y: 11, z: -8.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4863860907311928}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50, y: 0, z: 0}
 --- !u!20 &20022654306224838
 Camera:
   m_ObjectHideFlags: 0
@@ -96,23 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02853f5d34bd8f429969ac34c466d07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerPriorities: 0a0000000b00000009000000
+  enemyCursor: {fileID: 2800000, guid: 3cfaa99ee5395b440afbf20fac0835e7, type: 3}
   walkCursor: {fileID: 2800000, guid: ff1ee8bf595e2a24298690ed31b145da, type: 3}
-  cursorHotspot: {x: 0, y: 0}
---- !u!114 &114294829368660586
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1172424776519886}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b62d97b4b3415874eba550b1305b4b61, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetCursor: {fileID: 2800000, guid: 3cfaa99ee5395b440afbf20fac0835e7, type: 3}
-  errorCursor: {fileID: 2800000, guid: b05cf95f000a0274190904c2af20b848, type: 3}
   cursorHotspot: {x: 0, y: 0}
 --- !u!1 &1380720265414526
 GameObject:

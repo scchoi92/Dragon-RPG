@@ -15,7 +15,6 @@ namespace RPG.Characters
         [SerializeField] AudioClip[] damageSounds;
         [SerializeField] AudioClip[] deathSounds;
         [SerializeField] float deathVanishDelay = 5f;
-        // todo maybe a parameter for character vanishing
 
         const string DEATH_TRIGGER = "Death";
 
@@ -66,6 +65,7 @@ namespace RPG.Characters
             ReduceHealth(damage);
             if (characterDies)
             {
+                StopAllCoroutines();
                 StartCoroutine(KillCharacter());
             }
         }
@@ -79,11 +79,10 @@ namespace RPG.Characters
 
         IEnumerator KillCharacter()
         {
-            StopAllCoroutines();
             characterMovement.Kill();
             myAnimator.SetTrigger(DEATH_TRIGGER);
 
-            var playerComponent = GetComponent<PlayerMovement>();
+            var playerComponent = GetComponent<PlayerControl>();
             if(playerComponent && playerComponent.isActiveAndEnabled) // relying on lazy evaluation
             {
                 myAudioSource.clip = deathSounds[UnityEngine.Random.Range(0, deathSounds.Length)];

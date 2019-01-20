@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3835233738092184274}
   - component: {fileID: 8514963605803237307}
   - component: {fileID: 5703620530783560076}
-  m_Layer: 12
+  m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -222,11 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stoppingDistance: 1
   moveSpeedMultiplier: 1.5
-  animatorSpeedMultiplier: 1.5
-  movingTurnSpeed: 360
-  stationaryTurnSpeed: 180
+  animatorSpeedMultiplier: 1
+  movingTurnSpeed: 1000
+  stationaryTurnSpeed: 800
   animatorOverrideController: {fileID: 22100000, guid: a3f55f6b7aa2a6444bcfc78aa4f918e3,
     type: 2}
+  animatorForwardCap: 1
 --- !u!114 &114210096228230938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,10 +272,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78a9208cbe70285458eff3ae73566f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoints: 100
+  maxHealthPoints: 250
   healthBarImage: {fileID: 0}
-  damageSounds: []
-  deathSounds: []
+  damageSounds:
+  - {fileID: 8300000, guid: b0f3a2ff86d8fd24dae22adc31aa28fa, type: 3}
+  - {fileID: 8300000, guid: ad3b56debaf17a84f8b66925c216104c, type: 3}
+  - {fileID: 8300000, guid: 19f767821cfa1494488b3429b9108411, type: 3}
+  - {fileID: 8300000, guid: 23f45b63e5d612247a7f403dcc4ee7be, type: 3}
+  - {fileID: 8300000, guid: 1ce7bdef23437184c94bfeb0e6a7cbf5, type: 3}
+  - {fileID: 8300000, guid: adac04b91c96aff40b54d0572b2c55ca, type: 3}
+  deathSounds:
+  - {fileID: 8300000, guid: b60f29baeb0a9564bb7834b9774f682b, type: 3}
+  - {fileID: 8300000, guid: 08b3da1e8342c1547a6677c76fcb0a5a, type: 3}
+  - {fileID: 8300000, guid: 0ac6ff5d685cd47479d465767b9555a8, type: 3}
   deathVanishDelay: 5
   healPerSec: 0
 --- !u!114 &5703620530783560076

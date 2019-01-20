@@ -20,4 +20,5 @@ MonoBehaviour:
   additionalWeaponDamage: 25
   minTimeBtwHits: 0.85
   maxAttackRange: 1.5
+  damageDelay: 0.25
   cosmeticHead: {fileID: 0}

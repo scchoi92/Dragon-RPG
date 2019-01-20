@@ -15,8 +15,9 @@ namespace RPG.Characters
 
         [Header("Weapon Stats")]
         [SerializeField] float additionalWeaponDamage;
-        [SerializeField] float minTimeBtwHits;
+        [SerializeField] float timeBtwAnimationCycles;
         [SerializeField] float maxAttackRange;
+        [SerializeField] float damageDelay;
 
         [Header("Cosmetic")]
         [SerializeField] GameObject cosmeticHead;
@@ -26,9 +27,11 @@ namespace RPG.Characters
 
         public float GetAdditionalWeaponDamage() { return additionalWeaponDamage; }
 
-        public float GetMinTimeBtwHits() { return minTimeBtwHits; } //TODO consider whether we take animation time into account
+        public float GetTimeBtwAnimationCycles() { return timeBtwAnimationCycles; } //TODO consider whether we take animation time into account
 
         public float GetMaxAttackRange() { return maxAttackRange; }
+
+        public float GetDamageDelay() { return damageDelay; }
 
         public GameObject GetCosmeticHead() { return cosmeticHead; }
 

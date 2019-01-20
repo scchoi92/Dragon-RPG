@@ -80,7 +80,10 @@ namespace RPG.Characters
 
         public void UpdateEnergyOrbUI()
         {
-            energyBarImage.fillAmount = energyAsPercent;
+            if (energyBarImage)
+            {
+                energyBarImage.fillAmount = energyAsPercent;
+            }
         }
 
         

@@ -14,6 +14,7 @@ namespace RPG.Characters
         [SerializeField] float movingTurnSpeed = 360;
         [SerializeField] float stationaryTurnSpeed = 180;
         [SerializeField] AnimatorOverrideController animatorOverrideController;
+        [SerializeField] [Range(0.1f, 1f)]float animatorForwardCap = 1f;
 
         float moveThreshold = 1f;
 
@@ -60,11 +61,15 @@ namespace RPG.Characters
         public void Kill()
         {
             isAlive = false;
+            Move(Vector3.zero);
         }
 
         public void SetDestination(Vector3 worldPos)
         {
-            navMeshAgent.destination = worldPos;
+            if (isAlive)
+            {
+                navMeshAgent.destination = worldPos;
+            }
         }
 
         public AnimatorOverrideController GetOverrideController()
@@ -79,8 +84,6 @@ namespace RPG.Characters
             UpdateAnimator();
         }
 
-
-
         void SetForwardAndTurn(Vector3 movement)
         {
             if (movement.magnitude > moveThreshold)
@@ -94,7 +97,7 @@ namespace RPG.Characters
 
         void UpdateAnimator()
         {
-            myAnimator.SetFloat("Forward", forwardAmount, 0.1f, Time.deltaTime);
+            myAnimator.SetFloat("Forward", forwardAmount * animatorForwardCap, 0.1f, Time.deltaTime);
             myAnimator.SetFloat("Turn", turnAmount, 0.1f, Time.deltaTime);
             myAnimator.speed = animatorSpeedMultiplier;
         }
@@ -112,7 +115,6 @@ namespace RPG.Characters
                 navMeshAgent.SetDestination(enemy.transform.position);
             }
         }
-
 
         void OnAnimatorMove()
         {

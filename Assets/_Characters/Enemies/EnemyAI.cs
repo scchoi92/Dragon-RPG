@@ -1,10 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-// TODO consider re-wiring
-using RPG.Core;
-using System;
 
 namespace RPG.Characters
 {
@@ -16,10 +12,10 @@ namespace RPG.Characters
         [SerializeField] float chaseRadius = 6f;
         [SerializeField] float giveUpRadius = 10f;
         [SerializeField] float waypointStopDistance = 1f;
-        [SerializeField] float waypointStayTime = 0.5f;
+        [SerializeField] float waypointDwellTime = 0.5f;
         [SerializeField] WaypointContainer patrolPath;
 
-        PlayerMovement player;
+        PlayerControl player;
         Character character;
         int nextWaypointIndex = 0;
         float currentWeaponRange;
@@ -31,7 +27,7 @@ namespace RPG.Characters
 
         private void Start()
         {
-            player = FindObjectOfType<PlayerMovement>();
+            player = FindObjectOfType<PlayerControl>();
             character = GetComponent<Character>();
         }
 
@@ -55,18 +51,19 @@ namespace RPG.Characters
             {
                 StopAllCoroutines();
                 state = State.attacking;
+                weaponSystem.AttackTarget(player.gameObject);
             }
         }
 
         IEnumerator Patrol()
         {
             state = State.patrolling;
-            while (state == State.patrolling)
+            while (patrolPath != null)
             {
                 Vector3 nextWaypoinPos = patrolPath.transform.GetChild(nextWaypointIndex).position;
                 character.SetDestination(nextWaypoinPos);
                 CycleWaypointWhenClose(nextWaypoinPos);
-                yield return new WaitForSeconds(waypointStayTime); // todo parameterise
+                yield return new WaitForSeconds(waypointDwellTime);
             }
         }
 
